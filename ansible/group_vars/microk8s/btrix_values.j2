@@ -1,3 +1,6 @@
+{% if btrix_values %}
+{{ btrix_values | to_nice_yaml}}
+{% else %}
 ingress_class: "public"
 
 mongo_auth:
@@ -18,4 +21,5 @@ signer:
   cert_email: {{ cert_email }}
   image_pull_policy: "IfNotPresent"
   auth_token: {{ signing_authtoken }}
+{% endif %}
 {% endif %}
