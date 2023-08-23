@@ -82,7 +82,7 @@ spec:
 
 
 {{ if .Values.ingress.tls }}
-  {{ if .Values.ingress.tls_acme_http }}
+  {{ if .Values.ingress.tls_acme }}
 ---
 
 apiVersion: cert-manager.io/v1
