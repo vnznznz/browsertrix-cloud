@@ -266,6 +266,9 @@ ingress:
   cert_email: "test@example.com"
   scheme: "http"
   tls: false
+  tls_acme: true
+  tls_crt: ""
+  tls_key: ""
 
 ingress_class: nginx
 

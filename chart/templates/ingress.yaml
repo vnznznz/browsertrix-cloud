@@ -82,6 +82,7 @@ spec:
 
 
 {{ if .Values.ingress.tls }}
+  {{ if .Values.ingress.tls_acme_http }}
 ---
 
 apiVersion: cert-manager.io/v1
@@ -103,6 +104,31 @@ spec:
     - http01:
         ingress:
           class: {{ .Values.ingress_class | default "nginx" }}
+
+  {{ else if and .Values.ingress.tls_crt .Values.ingress.tls_key }}
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cert-main
+  namespace: cert-manager
+data:
+  tls.crt: {{ .Values.ingress.tls_crt }}
+  tls.key: {{ .Values.ingress.tls_key }}
+type: kubernetes.io/tls
+
+  {{ else }}
+---
+
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cert-main
+  namespace: cert-manager
+spec:
+  selfSigned: {}
+  {{ end }}
 
 {{ end }}
 {{ end }}
