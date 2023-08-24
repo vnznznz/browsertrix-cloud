@@ -1,9 +1,9 @@
 ---
-ansible_ssh_private_key_file: "~/.ssh/id_rsa"
 microk8s_cache_valid_time: 3600
 allow_world_readable_tmpfiles: true
 
-domain: "{{ domain_name | default('browsertrix.cloud') }}"
+domain: "browsertrix.cloud"
+
 ## version management
 microk8s_disable_snap_autoupdate: false
 
@@ -16,10 +16,9 @@ microk8s_dns_servers:
 # Define which release is installed and tracked for updates.
 microk8s_channel: stable
 
-your_user: root          # if your cloud provide uses another user change this
 browsertrix_cloud_home: "/opt/browsertrix-cloud"
-microk8s_user: "conan"
-microk8s_user_home: "/home/{{ microk8s_user }}"
+microk8s_user: conan
+microk8s_user_home: "/home/conan"
 microk8s_plugins:
   dns: true              # CoreDNS
   ingress: true          # Ingress controller for external access
