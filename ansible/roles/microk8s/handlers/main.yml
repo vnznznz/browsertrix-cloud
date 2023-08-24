@@ -1,0 +1,11 @@
+- name: Reboot System
+  ansible.builtin.reboot:
+  when:
+    - skip_handlers | default("false") == "false"
+
+- name: microk8s ready
+  ansible.builtin.command:
+    cmd: microk8s.status --wait-ready
+  changed_when: false
+  when:
+    - skip_handlers | default("false") == "false"
