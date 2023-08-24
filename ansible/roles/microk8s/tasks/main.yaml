@@ -370,7 +370,7 @@
 
 - name: micork8s deploy | helm | output values yaml
   ansible.builtin.template:
-    src: ../group_vars/microk8s/btrix_values.j2
+    src: btrix_values.j2
     dest: "{{ microk8s_user_home }}/values.yaml"
     mode: u+rw
   tags:
