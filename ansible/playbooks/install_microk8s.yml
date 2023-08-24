@@ -2,7 +2,7 @@
 # by default this playbook will add the ip address of your endpoint
 # pass '-e host_name="my-domain.example.edu"' for it to work best
 #
-- name: deploy microk8s 
+- name: deploy microk8s
   gather_facts: true
   hosts: "{{ host_ip | default('inventory_hostname') }}"
   remote_user: "{{ your_user }}"
@@ -348,17 +348,17 @@
       - microk8s_plugins is defined
       - microk8s_plugins.dns is defined
       - (microk8s_plugins.dns | bool)
-  
+
   # ===========================================
   # deploy browsertrix
   - name: microk8s deploy | create browsertrix repo
     ansible.builtin.git:
-      repo: "https://github.com/webrecorder/browsertrix-cloud"
+      repo: "{{ btrix_repo | default('https://github.com/webrecorder/browsertrix-cloud') }}"
       dest: "{{ browsertrix_cloud_home }}"
       clone: true
       update: true
       force: true
-      version: main
+      version: "{{ btrix_version | default('main') }}"
     tags:
       - helm_upgrade
 
